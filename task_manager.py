@@ -12,7 +12,6 @@ def add_task(tasks, task):
 def remove_task(tasks, task_id):
     tasks = [task for task in tasks if task['id'] != task_id]
     return tasks
-
     # Removes a task by its ID.
     # Parameters: tasks (list of dict): The current list of tasks.task_id (int): The ID of the task to be removed.
     # Returns:list of dict: Updated list of tasks.

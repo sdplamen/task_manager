@@ -4,30 +4,19 @@ from datetime import datetime
 def add_task(tasks, task):
     tasks.append(task)
     return tasks
-    '''
-    Adds a new task to the task list.
+    # Adds a new task to the task list.
+    # Parameters: tasks (list of dict): The current list of tasks. task (dict): The task to be added.
+    # Returns: list of dict: Updated list of tasks.
 
-    Parameters:
-    tasks (list of dict): The current list of tasks.
-    task (dict): The task to be added.
-
-    Returns:
-    list of dict: Updated list of tasks.
-    '''
 
 def remove_task(tasks, task_id):
     tasks = [task for task in tasks if task['id'] != task_id]
     return tasks
-    '''
-    Removes a task by its ID.
 
-    Parameters:
-    tasks (list of dict): The current list of tasks.
-    task_id (int): The ID of the task to be removed.
+    # Removes a task by its ID.
+    # Parameters: tasks (list of dict): The current list of tasks.task_id (int): The ID of the task to be removed.
+    # Returns:list of dict: Updated list of tasks.
 
-    Returns:
-    list of dict: Updated list of tasks.
-    '''
 
 def update_task(tasks, task_id, updated_task):
     for task in tasks:
@@ -35,33 +24,19 @@ def update_task(tasks, task_id, updated_task):
             task.update(updated_task)
             break
     return tasks
-    '''
-    Updates an existing task.
-
-    Parameters:
-    tasks (list of dict): The current list of tasks.
-    task_id (int): The ID of the task to be updated.
-    updated_task (dict): The updated task details.
-
-    Returns:
-    list of dict: Updated list of tasks.
-    '''
+    # Updates an existing task.
+    # Parameters: tasks (list of dict): The current list of tasks.task_id (int): The ID of the task to be updated. updated_task (dict): The updated task details.
+    # Returns: list of dict: Updated list of tasks.
 
 def get_task(tasks, task_id):
     for task in tasks:
         if task['id'] == task_id:
             return task
     return None
-    '''
-    Retrieves a task by its ID.
+    # Retrieves a task by its ID.
+    # Parameters: tasks (list of dict): The current list of tasks. task_id (int): The ID of the task to be retrieved.
+    # Returns: dict: The task with the specified ID, or None if not found.
 
-    Parameters:
-    tasks (list of dict): The current list of tasks.
-    task_id (int): The ID of the task to be retrieved.
-
-    Returns:
-    dict: The task with the specified ID, or None if not found.
-    '''
 
 def set_task_priority(tasks, task_id, priority):
     for task in tasks:
@@ -69,17 +44,9 @@ def set_task_priority(tasks, task_id, priority):
             task['priority'] = priority
             break
     return tasks
-    '''
-    Sets the priority of a task.
-
-    Parameters:
-    tasks (list of dict): The current list of tasks.
-    task_id (int): The ID of the task to be updated.
-    priority (str): The new priority level.
-
-    Returns:
-    list of dict: Updated list of tasks.
-    '''
+    # Sets the priority of a task.
+    # Parameters: tasks (list of dict): The current list of tasks. task_id (int): The ID of the task to be updated. priority (str): The new priority level.
+    # Returns: list of dict: Updated list of tasks.
 
 def set_task_deadline(tasks, task_id, deadline):
     for task in tasks:
@@ -87,17 +54,9 @@ def set_task_deadline(tasks, task_id, deadline):
             task['deadline'] = deadline
             break
     return tasks
-    '''
-    Sets the deadline for a task.
-
-    Parameters:
-    tasks (list of dict): The current list of tasks.
-    task_id (int): The ID of the task to be updated.
-    deadline (str): The new deadline.
-
-    Returns:
-    list of dict: Updated list of tasks.
-    '''
+    # Sets the deadline for a task.
+    # Parameters: tasks (list of dict): The current list of tasks. task_id (int): The ID of the task to be updated. deadline (str): The new deadline.
+    # Returns:  list of dict: Updated list of tasks.
 
 def mark_task_as_completed(tasks, task_id):
     for task in tasks:
@@ -105,16 +64,9 @@ def mark_task_as_completed(tasks, task_id):
             task['completed'] = True
             break
     return tasks
-    '''
-    Marks a task as completed.
-
-    Parameters:
-    tasks (list of dict): The current list of tasks.
-    task_id (int): The ID of the task to be marked as completed.
-
-    Returns:
-    list of dict: Updated list of tasks.
-    '''
+    # Marks a task as completed.
+    # Parameters: tasks (list of dict): The current list of tasks. task_id (int): The ID of the task to be marked as completed.
+    # Returns: list of dict: Updated list of tasks.
 
 def set_task_description(tasks, task_id, description):
     for task in tasks:
@@ -122,17 +74,9 @@ def set_task_description(tasks, task_id, description):
             task['description'] = description
             break
     return tasks
-    '''
-    Sets the description for a task.
-
-    Parameters:
-    tasks (list of dict): The current list of tasks.
-    task_id (int): The ID of the task to be updated.
-    description (str): The new description.
-
-    Returns:
-    list of dict: Updated list of tasks.
-    '''
+    # Sets the description for a task.
+    # Parameters: tasks (list of dict): The current list of tasks. task_id (int): The ID of the task to be updated. description (str): The new description.
+    # Returns: list of dict: Updated list of tasks.
 
 def search_tasks_by_keyword(tasks, keyword):
     found_tasks = []
@@ -140,96 +84,52 @@ def search_tasks_by_keyword(tasks, keyword):
         if keyword.lower() in task['description'].lower():
             found_tasks.append(task)
     return found_tasks
-    '''
-    Searches tasks by a keyword in the description.
+    # Searches tasks by a keyword in the description.
+    # Parameters: tasks (list of dict): The current list of tasks. keyword (str): The keyword to search for.
+    # Returns: list of dict: Tasks that contain the keyword in their description.
 
-    Parameters:
-    tasks (list of dict): The current list of tasks.
-    keyword (str): The keyword to search for.
-
-    Returns:
-    list of dict: Tasks that contain the keyword in their description.
-    '''
 
 def filter_tasks_by_priority(tasks, priority):
     filtered_tasks = [task for task in tasks if task['priority'].lower() == priority.lower()]
     return filtered_tasks
-    '''
-    Filters tasks by priority.
-
-    Parameters:
-    tasks (list of dict): The current list of tasks.
-    priority (str): The priority level to filter by.
-
-    Returns:
-    list of dict: Tasks with the specified priority.
-    '''
+    # Filters tasks by priority.
+    # Parameters: tasks (list of dict): The current list of tasks.npriority (str): The priority level to filter by.
+    # Returns: list of dict: Tasks with the specified priority.
 
 def filter_tasks_by_status(tasks, status):
     filtered_tasks = [task for task in tasks if task['completed'] == status]
     return filtered_tasks
-    '''
-    Filters tasks by their completion status.
-
-    Parameters:
-    tasks (list of dict): The current list of tasks.
-    status (bool): The completion status to filter by.
-
-    Returns:
-    list of dict: Tasks with the specified completion status.
-    '''
+    # Filters tasks by their completion status.
+    # Parameters: tasks (list of dict): The current list of tasks. status (bool): The completion status to filter by.
+    # Returns: list of dict: Tasks with the specified completion status.
 
 def filter_tasks_by_deadline(tasks, deadline):
     filtered_tasks = [task for task in tasks if task['deadline'] == deadline]
     return filtered_tasks
-    '''
-    Filters tasks by their deadline.
+    # Filters tasks by their deadline.
+    # Parameters: tasks (list of dict): The current list of tasks. deadline (str): The deadline to filter by.
+    # Peturns: list of dict: Tasks with the specified deadline.
 
-    Parameters:
-    tasks (list of dict): The current list of tasks.
-    deadline (str): The deadline to filter by.
-
-    Returns:
-    list of dict: Tasks with the specified deadline.
-    '''
 
 def count_tasks(tasks):
     return len(tasks)
-    '''
-    Returns the total number of tasks.
-
-    Parameters:
-    tasks (list of dict): The current list of tasks.
-
-    Returns:
-    int: The total number of tasks.
-    '''
+    # Returns the total number of tasks.
+    # Parameters: tasks (list of dict): The current list of tasks.
+    # Returns: int: The total number of tasks.
 
 def count_completed_tasks(tasks):
     completed_tasks = [task for task in tasks if task['completed']]
     return len(completed_tasks)
-    '''
-    Returns the number of completed tasks.
-
-    Parameters:
-    tasks (list of dict): The current list of tasks.
-
-    Returns:
-    int: The number of completed tasks.
-    '''
+    # Returns the number of completed tasks.
+    # Parameters: tasks (list of dict): The current list of tasks.
+    # Returns: int: The number of completed tasks.
 
 def count_pending_tasks(tasks):
     pending_tasks = [task for task in tasks if not task['completed']]
     return len(pending_tasks)
-    '''
-    Returns the number of pending tasks.
-
-    Parameters:
-    tasks (list of dict): The current list of tasks.
-
-    Returns:
-    int: The number of pending tasks.
-    '''
+    # Returns the number of pending tasks.
+    # Parameters: tasks (list of dict): The current list of tasks.
+    # Returns: int: The number of pending tasks.
 
 def generate_task_summary(tasks):
     total_tasks = count_tasks(tasks)
@@ -243,15 +143,9 @@ def generate_task_summary(tasks):
     }
 
     return summary
-    '''
-    Generates a summary report of all tasks.
-
-    Parameters:
-    tasks (list of dict): The current list of tasks.
-
-    Returns:
-    dict: A summary report containing total, completed, and pending tasks.
-    '''
+    # Generates a summary report of all tasks.
+    # Parameters: tasks (list of dict): The current list of tasks.
+    # Returns: dict: A summary report containing total, completed, and pending tasks.
 
 def save_tasks_to_file(tasks, file_path):
     with open(file_path, 'w'):
@@ -262,16 +156,10 @@ def save_tasks_to_file(tasks, file_path):
             file_path.write(f"Deadline: {task['deadline']}\n")
             file_path.write(f"Completed: {task['completed']}\n")
             file_path.write('\n')
-    '''
-    Saves the task list to a file.
+    # Saves the task list to a file.
+    # Parameters: tasks (list of dict): The current list of tasks. file_path (str): The path to the file where tasks will be saved.
+    # Returns: None
 
-    Parameters:
-    tasks (list of dict): The current list of tasks.
-    file_path (str): The path to the file where tasks will be saved.
-
-    Returns:
-    None
-    '''
 
 def load_tasks_from_file(file_path):
     tasks = []
@@ -299,42 +187,25 @@ def load_tasks_from_file(file_path):
     except FileNotFoundError:
         print(f'File {file_path} not found.')
     return tasks
-    '''
-        Loads the task list from a file.
-
-        Parameters:
-        file_path (str): The path to the file where tasks are saved.
-
-        Returns:
-        list of dict: The loaded list of tasks.
-    '''
+    # Loads the task list from a file.
+    # Parameters: file_path (str): The path to the file where tasks are saved.
+    # Returns: list of dict: The loaded list of tasks.
 
 def sort_tasks_by_deadline(tasks):
     sorted_tasks = sorted(tasks, key=lambda x: x['deadline'])
     return sorted_tasks
-    '''
-    Sorts tasks by their deadline.
+    # Sorts tasks by their deadline.
+    # Parameters: tasks (list of dict): The current list of tasks.
+    # Returns: list of dict: The sorted list of tasks.
 
-    Parameters:
-    tasks (list of dict): The current list of tasks.
-
-    Returns:
-    list of dict: The sorted list of tasks.
-    '''
 
 def sort_tasks_by_priority(tasks):
     priority_order = {'low': 1, 'medium': 2, 'high': 3}
     sorted_tasks = sorted(tasks, key=lambda x: priority_order.get(x['priority'].lower(), 0))
     return sorted_tasks
-    '''
-    Sorts tasks by their priority.
-
-    Parameters:
-    tasks (list of dict): The current list of tasks.
-
-    Returns:
-    list of dict: The sorted list of tasks.
-    '''
+    # Sorts tasks by their priority.
+    # Parameters: tasks (list of dict): The current list of tasks.
+    # Returns: ist of dict: The sorted list of tasks.
 
 def print_menu():
     '''

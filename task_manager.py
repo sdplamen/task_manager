@@ -2,7 +2,9 @@ import json
 from datetime import datetime
 
 def add_task(tasks, task):
-    """
+    tasks.append(task)
+    return tasks
+    '''
     Adds a new task to the task list.
 
     Parameters:
@@ -11,10 +13,12 @@ def add_task(tasks, task):
 
     Returns:
     list of dict: Updated list of tasks.
-    """
+    '''
 
 def remove_task(tasks, task_id):
-    """
+    tasks = [task for task in tasks if task['id'] != task_id]
+    return tasks
+    '''
     Removes a task by its ID.
 
     Parameters:
@@ -23,10 +27,15 @@ def remove_task(tasks, task_id):
 
     Returns:
     list of dict: Updated list of tasks.
-    """
+    '''
 
 def update_task(tasks, task_id, updated_task):
-    """
+    for task in tasks:
+        if task['id'] == task_id:
+            task.update(updated_task)
+            break
+    return tasks
+    '''
     Updates an existing task.
 
     Parameters:
@@ -36,10 +45,14 @@ def update_task(tasks, task_id, updated_task):
 
     Returns:
     list of dict: Updated list of tasks.
-    """
+    '''
 
 def get_task(tasks, task_id):
-    """
+    for task in tasks:
+        if task['id'] == task_id:
+            return task
+    return None
+    '''
     Retrieves a task by its ID.
 
     Parameters:
@@ -48,10 +61,15 @@ def get_task(tasks, task_id):
 
     Returns:
     dict: The task with the specified ID, or None if not found.
-    """
+    '''
 
 def set_task_priority(tasks, task_id, priority):
-    """
+    for task in tasks:
+        if task['id'] == task_id:
+            task['priority'] = priority
+            break
+    return tasks
+    '''
     Sets the priority of a task.
 
     Parameters:
@@ -61,10 +79,15 @@ def set_task_priority(tasks, task_id, priority):
 
     Returns:
     list of dict: Updated list of tasks.
-    """
+    '''
 
 def set_task_deadline(tasks, task_id, deadline):
-    """
+    for task in tasks:
+        if task['id'] == task_id:
+            task['deadline'] = deadline
+            break
+    return tasks
+    '''
     Sets the deadline for a task.
 
     Parameters:
@@ -74,10 +97,15 @@ def set_task_deadline(tasks, task_id, deadline):
 
     Returns:
     list of dict: Updated list of tasks.
-    """
+    '''
 
 def mark_task_as_completed(tasks, task_id):
-    """
+    for task in tasks:
+        if task['id'] == task_id:
+            task['completed'] = True
+            break
+    return tasks
+    '''
     Marks a task as completed.
 
     Parameters:
@@ -86,10 +114,15 @@ def mark_task_as_completed(tasks, task_id):
 
     Returns:
     list of dict: Updated list of tasks.
-    """
+    '''
 
 def set_task_description(tasks, task_id, description):
-    """
+    for task in tasks:
+        if task['id'] == task_id:
+            task['description'] = description
+            break
+    return tasks
+    '''
     Sets the description for a task.
 
     Parameters:
@@ -99,10 +132,15 @@ def set_task_description(tasks, task_id, description):
 
     Returns:
     list of dict: Updated list of tasks.
-    """
+    '''
 
 def search_tasks_by_keyword(tasks, keyword):
-    """
+    found_tasks = []
+    for task in tasks:
+        if keyword.lower() in task['description'].lower():
+            found_tasks.append(task)
+    return found_tasks
+    '''
     Searches tasks by a keyword in the description.
 
     Parameters:
@@ -111,10 +149,12 @@ def search_tasks_by_keyword(tasks, keyword):
 
     Returns:
     list of dict: Tasks that contain the keyword in their description.
-    """
+    '''
 
 def filter_tasks_by_priority(tasks, priority):
-    """
+    filtered_tasks = [task for task in tasks if task['priority'].lower() == priority.lower()]
+    return filtered_tasks
+    '''
     Filters tasks by priority.
 
     Parameters:
@@ -123,10 +163,12 @@ def filter_tasks_by_priority(tasks, priority):
 
     Returns:
     list of dict: Tasks with the specified priority.
-    """
+    '''
 
 def filter_tasks_by_status(tasks, status):
-    """
+    filtered_tasks = [task for task in tasks if task['completed'] == status]
+    return filtered_tasks
+    '''
     Filters tasks by their completion status.
 
     Parameters:
@@ -135,10 +177,12 @@ def filter_tasks_by_status(tasks, status):
 
     Returns:
     list of dict: Tasks with the specified completion status.
-    """
+    '''
 
 def filter_tasks_by_deadline(tasks, deadline):
-    """
+    filtered_tasks = [task for task in tasks if task['deadline'] == deadline]
+    return filtered_tasks
+    '''
     Filters tasks by their deadline.
 
     Parameters:
@@ -147,10 +191,11 @@ def filter_tasks_by_deadline(tasks, deadline):
 
     Returns:
     list of dict: Tasks with the specified deadline.
-    """
+    '''
 
 def count_tasks(tasks):
-    """
+    return len(tasks)
+    '''
     Returns the total number of tasks.
 
     Parameters:
@@ -158,10 +203,12 @@ def count_tasks(tasks):
 
     Returns:
     int: The total number of tasks.
-    """
+    '''
 
 def count_completed_tasks(tasks):
-    """
+    completed_tasks = [task for task in tasks if task['completed']]
+    return len(completed_tasks)
+    '''
     Returns the number of completed tasks.
 
     Parameters:
@@ -169,10 +216,12 @@ def count_completed_tasks(tasks):
 
     Returns:
     int: The number of completed tasks.
-    """
+    '''
 
 def count_pending_tasks(tasks):
-    """
+    pending_tasks = [task for task in tasks if not task['completed']]
+    return len(pending_tasks)
+    '''
     Returns the number of pending tasks.
 
     Parameters:
@@ -180,10 +229,21 @@ def count_pending_tasks(tasks):
 
     Returns:
     int: The number of pending tasks.
-    """
+    '''
 
 def generate_task_summary(tasks):
-    """
+    total_tasks = count_tasks(tasks)
+    completed_tasks = count_completed_tasks(tasks)
+    pending_tasks = count_pending_tasks(tasks)
+
+    summary = {
+        'total_tasks': total_tasks,
+        'completed_tasks': completed_tasks,
+        'pending_tasks': pending_tasks
+    }
+
+    return summary
+    '''
     Generates a summary report of all tasks.
 
     Parameters:
@@ -191,10 +251,18 @@ def generate_task_summary(tasks):
 
     Returns:
     dict: A summary report containing total, completed, and pending tasks.
-    """
+    '''
 
 def save_tasks_to_file(tasks, file_path):
-    """
+    with open(file_path, 'w'):
+        for task in tasks:
+            file_path.write(f"ID: {task['id']}\n")
+            file_path.write(f"Description: {task['description']}\n")
+            file_path.write(f"Priority: {task['priority']}\n")
+            file_path.write(f"Deadline: {task['deadline']}\n")
+            file_path.write(f"Completed: {task['completed']}\n")
+            file_path.write('\n')
+    '''
     Saves the task list to a file.
 
     Parameters:
@@ -203,21 +271,48 @@ def save_tasks_to_file(tasks, file_path):
 
     Returns:
     None
-    """
+    '''
 
 def load_tasks_from_file(file_path):
-    """
-    Loads the task list from a file.
+    tasks = []
+    try:
+        with open(file_path, 'r'):
+            lines = file_path.readlines()
+            task = {}
+            for line in lines:
+                if line:
+                    key, value = line.split(': ')
+                    if key == 'ID':
+                        if task:
+                            tasks.append(task)
+                        task = {'id': int(value)}
+                    elif key == 'Description':
+                        task['description'] = value
+                    elif key == 'Priority':
+                        task['priority'] = value
+                    elif key == 'Deadline':
+                        task['deadline'] = value
+                    elif key == 'Completed':
+                        task['completed'] = value == 'True'
+            if task:
+                tasks.append(task)
+    except FileNotFoundError:
+        print(f'File {file_path} not found.')
+    return tasks
+    '''
+        Loads the task list from a file.
 
-    Parameters:
-    file_path (str): The path to the file where tasks are saved.
+        Parameters:
+        file_path (str): The path to the file where tasks are saved.
 
-    Returns:
-    list of dict: The loaded list of tasks.
-    """
+        Returns:
+        list of dict: The loaded list of tasks.
+    '''
 
 def sort_tasks_by_deadline(tasks):
-    """
+    sorted_tasks = sorted(tasks, key=lambda x: x['deadline'])
+    return sorted_tasks
+    '''
     Sorts tasks by their deadline.
 
     Parameters:
@@ -225,10 +320,13 @@ def sort_tasks_by_deadline(tasks):
 
     Returns:
     list of dict: The sorted list of tasks.
-    """
+    '''
 
 def sort_tasks_by_priority(tasks):
-    """
+    priority_order = {'low': 1, 'medium': 2, 'high': 3}
+    sorted_tasks = sorted(tasks, key=lambda x: priority_order.get(x['priority'].lower(), 0))
+    return sorted_tasks
+    '''
     Sorts tasks by their priority.
 
     Parameters:
@@ -236,13 +334,13 @@ def sort_tasks_by_priority(tasks):
 
     Returns:
     list of dict: The sorted list of tasks.
-    """
+    '''
 
 def print_menu():
-    """
+    '''
     Prints the user menu.
-    """
-    menu = """
+    '''
+    menu = '''
     Task Manager Menu:
     1. Add Task
     2. Remove Task
@@ -265,107 +363,130 @@ def print_menu():
     19. Sort Tasks by Deadline
     20. Sort Tasks by Priority
     21. Exit
-    """
+    '''
     print(menu)
 
 def main():
     tasks = []
     while True:
         print_menu()
-        choice = input("Enter your choice: ")
+        choice = input('Enter your choice: ')
         if choice == '1':
             task = {
-                'id': int(input("Enter task ID: ")),
-                'description': input("Enter task description: "),
-                'priority': input("Enter task priority (low, medium, high): "),
-                'deadline': input("Enter task deadline (YYYY-MM-DD): "),
+                'id': int(input('Enter task ID: ')),
+                'description': input('Enter task description: '),
+                'priority': input('Enter task priority (low, medium, high): '),
+                'deadline': input('Enter task deadline (YYYY-MM-DD): '),
                 'completed': False
             }
             tasks = add_task(tasks, task)
-            print("Task added successfully.")
+            print('Task added successfully.')
         elif choice == '2':
-            task_id = int(input("Enter task ID to remove: "))
+            task_id = int(input('Enter task ID to remove: '))
             tasks = remove_task(tasks, task_id)
-            print("Task removed successfully.")
+            print('Task removed successfully.')
         elif choice == '3':
-            task_id = int(input("Enter task ID to update: "))
+            task_id = int(input('Enter task ID to update: '))
             updated_task = {
-                'description': input("Enter new task description: "),
-                'priority': input("Enter new task priority (low, medium, high): "),
-                'deadline': input("Enter new task deadline (YYYY-MM-DD): ")
+                'description': input('Enter new task description: '),
+                'priority': input('Enter new task priority (low, medium, high): '),
+                'deadline': input('Enter new task deadline (YYYY-MM-DD): ')
             }
             tasks = update_task(tasks, task_id, updated_task)
-            print("Task updated successfully.")
+            print('Task updated successfully.')
         elif choice == '4':
-            task_id = int(input("Enter task ID to get: "))
+            task_id = int(input('Enter task ID to get: '))
             task = get_task(tasks, task_id)
             print("Task details:", task)
         elif choice == '5':
-            task_id = int(input("Enter task ID to set priority: "))
-            priority = input("Enter new priority (low, medium, high): ")
+            task_id = int(input('Enter task ID to set priority: '))
+            priority = input('Enter new priority (low, medium, high): ')
             tasks = set_task_priority(tasks, task_id, priority)
-            print("Task priority set successfully.")
+            print('Task priority set successfully.')
         elif choice == '6':
-            task_id = int(input("Enter task ID to set deadline: "))
-            deadline = input("Enter new deadline (YYYY-MM-DD): ")
+            task_id = int(input('Enter task ID to set deadline: '))
+            deadline = input('Enter new deadline (YYYY-MM-DD): ')
             tasks = set_task_deadline(tasks, task_id, deadline)
-            print("Task deadline set successfully.")
+            print('Task deadline set successfully.')
         elif choice == '7':
-            task_id = int(input("Enter task ID to mark as completed: "))
+            task_id = int(input('Enter task ID to mark as completed: '))
             tasks = mark_task_as_completed(tasks, task_id)
-            print("Task marked as completed.")
+            print('Task marked as completed.')
         elif choice == '8':
-            task_id = int(input("Enter task ID to set description: "))
-            description = input("Enter new description: ")
+            task_id = int(input('Enter task ID to set description: '))
+            description = input('Enter new description: ')
             tasks = set_task_description(tasks, task_id, description)
-            print("Task description set successfully.")
+            print('Task description set successfully.')
         elif choice == '9':
-            keyword = input("Enter keyword to search: ")
+            keyword = input('Enter keyword to search: ')
             found_tasks = search_tasks_by_keyword(tasks, keyword)
-            print("Tasks found:", found_tasks)
+            # print('Tasks found:', found_tasks)
+            if found_tasks:
+                print('Tasks found:')
+                for task in found_tasks:
+                    print(task)
+            else:
+                print(f'No tasks found with the {keyword}.')
         elif choice == '10':
-            priority = input("Enter priority to filter by (low, medium, high): ")
+            priority = input('Enter priority to filter by (low, medium, high): ')
             filtered_tasks = filter_tasks_by_priority(tasks, priority)
-            print("Filtered tasks:", filtered_tasks)
+            # print('Filtered tasks:', filtered_tasks)
+            if filtered_tasks:
+                print('Filtered tasks:')
+                for task in filtered_tasks:
+                    print(task)
+            else:
+                print(f'No tasks found with {priority}.')
         elif choice == '11':
-            status = input("Enter status to filter by (completed/pending): ").lower() == 'completed'
+            status = input('Enter status to filter by (completed/pending): ').lower() == 'completed'
             filtered_tasks = filter_tasks_by_status(tasks, status)
-            print("Filtered tasks:", filtered_tasks)
+            # print('Filtered tasks:', filtered_tasks)
+            if filtered_tasks:
+                print('Filtered tasks:')
+                for task in filtered_tasks:
+                    print(task)
+            else:
+                print(f'No tasks found with {status}.')
         elif choice == '12':
-            deadline = input("Enter deadline to filter by (YYYY-MM-DD): ")
+            deadline = input('Enter deadline to filter by (YYYY-MM-DD): ')
             filtered_tasks = filter_tasks_by_deadline(tasks, deadline)
-            print("Filtered tasks:", filtered_tasks)
+            # print('Filtered tasks:', filtered_tasks)
+            if filtered_tasks:
+                print('Filtered tasks:')
+                for task in filtered_tasks:
+                    print(task)
         elif choice == '13':
             total_tasks = count_tasks(tasks)
-            print("Total number of tasks:", total_tasks)
+            print('Total number of tasks:', total_tasks)
         elif choice == '14':
             completed_tasks = count_completed_tasks(tasks)
-            print("Number of completed tasks:", completed_tasks)
+            print('Number of completed tasks:', completed_tasks)
         elif choice == '15':
             pending_tasks = count_pending_tasks(tasks)
-            print("Number of pending tasks:", pending_tasks)
+            print('Number of pending tasks:', pending_tasks)
         elif choice == '16':
             summary = generate_task_summary(tasks)
-            print("Task Summary:", summary)
+            print('Task Summary:', summary)
         elif choice == '17':
-            file_path = input("Enter file path to save tasks: ")
+            file_path = input('Enter file path to save tasks: ')
             save_tasks_to_file(tasks, file_path)
-            print("Tasks saved to file.")
+            print('Tasks saved to file.')
         elif choice == '18':
-            file_path = input("Enter file path to load tasks from: ")
+            file_path = input('Enter file path to load tasks from: ')
             tasks = load_tasks_from_file(file_path)
-            print("Tasks loaded from file.")
+            print('Tasks loaded from file.')
         elif choice == '19':
             tasks = sort_tasks_by_deadline(tasks)
-            print("Tasks sorted by deadline.")
+            print('Tasks sorted by deadline.')
         elif choice == '20':
             tasks = sort_tasks_by_priority(tasks)
-            print("Tasks sorted by priority.")
+            print('Tasks sorted by priority.')
         elif choice == '21':
-            print("Exiting...")
+            print('Exiting...')
             break
         else:
-            print("Invalid choice. Please try again.")
+            print('Invalid choice. Please try again.')
 
-if __name__ == "__main__":
+
+if __name__ == '__main__':
     main()
